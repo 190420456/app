@@ -17,5 +17,12 @@ bbbbbbbbbbb lkdslf
 ?>
 ```
 
+```
+function test(){
+	sdfsdf;
+}
+```
+
+
 bbbbbbb
 
