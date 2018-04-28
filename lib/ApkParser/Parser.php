@@ -28,13 +28,23 @@ class Parser
     {
         $this->config = new Config($config);
         $this->apk = new Archive($apkFile);
-        $this->manifest = new Manifest(new XmlParser($this->apk->getManifestStream()));
+        $stream = $this->apk->getManifestStream();
+        if ($stream) {
+            $this->manifest = new Manifest(new XmlParser($stream));
+        } else {
+            $this->manifest = NULL;
+        }
 
-        if (!$this->config->manifest_only)
-            $this->resources = new ResourcesParser($this->apk->getResourcesStream());
-        else
+        if (!$this->config->manifest_only) {
+            $stream = $this->apk->getResourcesStream();
+            if ($stream) {
+                $this->resources = new ResourcesParser($stream);
+            } else {
+                $this->resources = NULL;
+            }
+        } else {
             $this->resources = NULL;
-
+        }
     }
 
     /**

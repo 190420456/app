@@ -62,7 +62,11 @@ class Archive extends \ZipArchive
      */
     public function getManifestStream()
     {
-        return new Stream($this->getStream('AndroidManifest.xml'));
+        $stream = $this->getStream('AndroidManifest.xml');
+        if($stream){
+            return new Stream($stream);
+        }
+        return null;
     }
 
     /**
@@ -70,7 +74,12 @@ class Archive extends \ZipArchive
      */
     public function getResourcesStream()
     {
-        return new SeekableStream($this->getStream('resources.arsc'));
+        $stream = $this->getStream('resources.arsc');
+        if ($stream) {
+            return new SeekableStream($stream);
+        }
+
+        return null;
     }
 
     /**
